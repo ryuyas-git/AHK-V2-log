@@ -3,9 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>AHKv2の基本構文について</title>
 </head>
 <body>
-  <p>最初の項目です</p>
+  <h1>AutoHotKey v2の基本構文について</h1>
+  <p>AutoHotKeyをインストールして</p>
+  <p>スクリプトを書こうとしたものの</p>
+  <p>何をしたらいいのかわからない人に向けて</p>
+  <p>基本構文を書いていきます。</p>
+
+  <h2>キーの入れ替え</h2>
+  <p>なんといっても最初に理解しておくべき構文はこれです。</p>
+  <div class="code-block"></div>
+    <pre><code> 
+      a::b 
+    </code></pre>
+  </div>
+  <p>この構造は</p>
+  <p>入力::出力</p>
+  <p>となっていて</p>
+  <p>キーボードでAキーを入力すると</p>
+  <p>Bキーを押したときの動作が実行されるようになります。</p>
+
+  <h2>キーの無効化</h2>
+  <p>次にキーの無効化です</p>
+    <div class="code-block"></div>
+    <pre><code> 
+      a::return
+    </code></pre>
+  </div>
+  <p>こうすることでキーボードでAキーを入力すると</p>
+  <p>入力が無視され、なにも起こらなくなります。</p>
+  <p>caps lockなどよく打ち間違えるキーを</p>
+  <p>無効化しておくと便利でしょう。</p>
+
+
 </body>
 </html>
