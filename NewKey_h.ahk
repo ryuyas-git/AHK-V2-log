@@ -1,0 +1,160 @@
+
+; --- 設定定義 ---
+global config := {
+    waitTime: 150,      ; 処理開始までの待機時間
+    doubleTap: 100,     ; ダブルタップとみなす間隔
+    longTap: 150        ; 長押しとみなす間隔
+}
+
+; --- 日本語キーボード配列 ---
+hotkeys := [
+"1","2","3","4","5","6","7","8","9","0","-","^","\",
+"q","w","e","r","t","y","u","i","o","p","@","[",
+"a","s","d","f","g","h","j","k","l",";",":","]",
+"z","x","c","v","b","n","m",",",".","/","vkE2",
+"Enter",
+"Space",
+]
+
+; 各キーの個別アクション定義（コメントを外すと有効になります）
+; Single: 単押し, Double: ダブル, Long: 長押し
+sendActionList := Map(
+    ; 1段目
+    ; "{1}", { Single: "{1}", Double: "{11}", Long: "{1}" },
+    ; "{2}", { Single: "{2}", Double: "{22}", Long: "{2}" },
+    ; "{3}", { Single: "{3}", Double: "{33}", Long: "{3}" },
+    ; "{4}", { Single: "{4}", Double: "{44}", Long: "{4}" },
+    ; "{5}", { Single: "{5}", Double: "{55}", Long: "{5}" },
+    ; "{6}", { Single: "{6}", Double: "{66}", Long: "{6}" },
+    ; "{7}", { Single: "{7}", Double: "{77}", Long: "{7}" },
+    ; "{8}", { Single: "{8}", Double: "{88}", Long: "{8}" },
+    ; "{9}", { Single: "{9}", Double: "{99}", Long: "{9}" },
+    ; "{0}", { Single: "{0}", Double: "{00}", Long: "{0}" },
+    ; "{-}", { Single: "{-}", Double: "{--}", Long: "{-}" },
+    ; "{^}", { Single: "{^}", Double: "{^^}", Long: "{^}" },
+    ; "{\}", { Single: "{\}", Double: "{\\}", Long: "{\}" },
+
+    ; 2段目
+    ; "{q}", { Single: "{q}", Double: "{qq}", Long: "{q}" },
+    ; "{w}", { Single: "{w}", Double: "{ww}", Long: "{w}" },
+    ; "{e}", { Single: "{e}", Double: "{ee}", Long: "{e}" },
+    ; "{r}", { Single: "{r}", Double: "{rr}", Long: "{r}" },
+    ; "{t}", { Single: "{t}", Double: "{tt}", Long: "{t}" },
+    ; "{y}", { Single: "{y}", Double: "{yy}", Long: "{y}" },
+    ; "{u}", { Single: "{u}", Double: "{uu}", Long: "{u}" },
+    ; "{i}", { Single: "{i}", Double: "{ii}", Long: "{i}" },
+    ; "{o}", { Single: "{o}", Double: "{oo}", Long: "{o}" },
+    ; "{p}", { Single: "{p}", Double: "{pp}", Long: "{p}" },
+    ; "{@}", { Single: "{@}", Double: "{@@}", Long: "{@}" },
+    ; "{[}", { Single: "{[}", Double: "{[[}", Long: "{[}" },
+
+    ; 3段目
+    ; "{a}", { Single: "{a}", Double: "{aa}", Long: "{a}" },
+    ; "{s}", { Single: "{s}", Double: "{ss}", Long: "{s}" },
+    ; "{d}", { Single: "{d}", Double: "{dd}", Long: "{d}" },
+    ; "{f}", { Single: "{f}", Double: "{ff}", Long: "{f}" },
+    ; "{g}", { Single: "{g}", Double: "{gg}", Long: "{g}" },
+    ; "{h}", { Single: "{h}", Double: "{hh}", Long: "{h}" },
+    ; "{j}", { Single: "{j}", Double: "{jj}", Long: "{j}" },
+    ; "{k}", { Single: "{k}", Double: "{kk}", Long: "{k}" },
+    ; "{l}", { Single: "{l}", Double: "{ll}", Long: "{l}" },
+     "{;}", { Single: "{-}", Double: "{=}", Long: "{_}" },
+     "{:}", { Single: "{#}", Double: "{&}", Long: "{&}" },
+    ; "{]}", { Single: "{]}", Double: "{]]}", Long: "{]}" 
+
+    ; 4段目
+    ; "{z}", { Single: "{z}", Double: "{zz}", Long: "{z}" },
+    ; "{x}", { Single: "{x}", Double: "{xx}", Long: "{x}" },
+    ; "{c}", { Single: "{c}", Double: "{cc}", Long: "{c}" },
+    ; "{v}", { Single: "{v}", Double: "{vv}", Long: "{v}" },
+    ; "{b}", { Single: "{b}", Double: "{bb}", Long: "{b}" },
+    ; "{n}", { Single: "{n}", Double: "{nn}", Long: "{n}" },
+    ; "{m}", { Single: "{m}", Double: "{mm}", Long: "{m}" },
+     "{,}", { Single: "{,}", Double: "{;}", Long: "{;}" },
+     "{.}", { Single: "{.}", Double: "{:}", Long: "{:}" },
+     "{/}", { Single: "{/}", Double: "{\}", Long: "{|}" },
+    ;"{vkE2}", { Single: "{\}", Double: "{\\}", Long: "{\}" }, ; 右シフト横の\のキー
+
+    ; 1段目(Shift+キー)
+    ; "{!}", { Single: "{!}", Double: "{!!}", Long: "{!}" },
+    ; "{"}", { Single: "{"}", Double: '{"}{"}', Long: '{"}' },
+    ; "{#}", { Single: "{#}", Double: "{##}", Long: "{#}" },
+    ; "{$}", { Single: "{$}", Double: "{$$}", Long: "{$}" },
+    ; "{%}", { Single: "{%}", Double: "{%%}", Long: "{%}" },
+    ; "{&}", { Single: "{&}", Double: "{&&}", Long: "{&}" },
+     "{'}", { Single: "{'}", Double: '{"}', Long: "{``}" },
+     "{(}", { Single: "{(}", Double: "{{}", Long: "{[}" },
+     "{)}", { Single: "{)}", Double: "{}}", Long: "{]}" },
+    ; "{=}", { Single: "{=}", Double: "{==}", Long: "{=}" },
+    ; "{~}", { Single: "{~}", Double: "{~~}", Long: "{~}" },
+    ; "{|}", { Single: "{|}", Double: "{||}", Long: "{|}" },
+
+    ; 2段目(Shift+キー)
+    ; "{Q}", { Single: "{Q}", Double: "{QQ}", Long: "{Q}" },
+    ; "{W}", { Single: "{W}", Double: "{WW}", Long: "{W}" },
+    ; "{E}", { Single: "{E}", Double: "{EE}", Long: "{E}" },
+    ; "{R}", { Single: "{R}", Double: "{RR}", Long: "{R}" },
+    ; "{T}", { Single: "{T}", Double: "{TT}", Long: "{T}" },
+    ; "{Y}", { Single: "{Y}", Double: "{YY}", Long: "{Y}" },
+    ; "{U}", { Single: "{U}", Double: "{UU}", Long: "{U}" },
+    ; "{I}", { Single: "{I}", Double: "{II}", Long: "{I}" },
+    ; "{O}", { Single: "{O}", Double: "{OO}", Long: "{O}" },
+    ; "{P}", { Single: "{P}", Double: "{PP}", Long: "{P}" },
+    ; "{`}", { Single: "{`}", Double: "{``}", Long: "{`}" },
+    ; "{{}", { Single: "{{}", Double: "{{{}", Long: "{{}" },
+
+    ; 3段目(Shift+キー)
+    ; "{A}", { Single: "{A}", Double: "{AA}", Long: "{A}" },
+    ; "{S}", { Single: "{S}", Double: "{SS}", Long: "{S}" },
+    ; "{D}", { Single: "{D}", Double: "{DD}", Long: "{D}" },
+    ; "{F}", { Single: "{F}", Double: "{FF}", Long: "{F}" },
+    ; "{G}", { Single: "{G}", Double: "{GG}", Long: "{G}" },
+    ; "{H}", { Single: "{H}", Double: "{HH}", Long: "{H}" },
+    ; "{J}", { Single: "{J}", Double: "{JJ}", Long: "{J}" },
+    ; "{K}", { Single: "{K}", Double: "{KK}", Long: "{K}" },
+    ; "{L}", { Single: "{L}", Double: "{LL}", Long: "{L}" },
+     "{+}", { Single: "{+}", Double: "{%}", Long: "{%}" },
+     "{*}", { Single: "{*}", Double: "{&}", Long: "{&}" },
+    ; "{}}", { Single: "{}}", Double: "{}}}", Long: "{}}" },
+
+    ; 4段目(Shift+キー)
+    ; "{Z}", { Single: "{Z}", Double: "{ZZ}", Long: "{Z}" },
+    ; "{X}", { Single: "{X}", Double: "{XX}", Long: "{X}" },
+    ; "{C}", { Single: "{C}", Double: "{CC}", Long: "{C}" },
+    ; "{V}", { Single: "{V}", Double: "{VV}", Long: "{V}" },
+    ; "{B}", { Single: "{B}", Double: "{BB}", Long: "{B}" },
+    ; "{N}", { Single: "{N}", Double: "{NN}", Long: "{N}" },
+    ; "{M}", { Single: "{M}", Double: "{MM}", Long: "{M}" },
+     "{<}", { Single: "{<}", Double: "{^}", Long: "{^}" },
+     "{>}", { Single: "{>}", Double: "{$}", Long: "{$}" },
+     "{?}", { Single: "{?}", Double: "{!}", Long: "{!}" },
+    ; "{_}", { Single: "{_}", Double: "{__}", Long: "{_}" },
+)
+
+; --- Shiftを押した時の対応表(日本語キーボード用) ---
+shiftMap := Map(
+	"{1}", "{!}",
+	"{2}", '{"}',  ; 外側をシングル、内側をダブルにすればそのまま書けます
+	"{3}", "{#}",
+	"{4}", "{$}",
+	"{5}", "{%}",
+	"{6}", "{&}",
+	"{7}", "{'}",
+	"{8}", "{(}",
+	"{9}", "{)}",
+	"{0}", "{ }",
+	"{-}", "{=}",
+	"{^}", "{~}",
+	"{\}", "{|}",
+	"{@}", "{``}",
+	"{[}", "{{}",
+	"{;}", "{+}",
+	"{:}", "{*}",
+	"{]}", "{}}",
+	"{,}", "{<}",
+	"{.}", "{>}",
+	"{/}", "{?}",
+    "{vkE2}", "{_}",
+    "{Enter}", "+{Enter}",
+    "{Space}", "+{Space}"
+	)
