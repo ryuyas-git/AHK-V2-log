@@ -1,6 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 
-#include "NewKey_h.ahk"
+#include "Config.ahk"
 
 ; --- 疑似的な入出力ストリーム ---
 global streamSelf := Array()
@@ -225,4 +225,4 @@ isShiftOn(k)
 	return shiftMap.Has(k) ? shiftMap[k] : StrUpper(k)
 }
 
-#Include "MyLayerScript.ahk"
+#Include "Layer.ahk"
