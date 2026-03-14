@@ -1,69 +1,33 @@
 
-layerMap := Map(
-     "1", "{F1}", 
-     "2", "{F2}", 
-     "3", "{F3}", 
-     "4", "{F4}", 
-     "5", "{F5}", 
-     "6", "{F6}", 
-     "7", "{F7}", 
-     "8", "{F8}", 
-     "9", "{F9}", 
-     "0", "{F10}", 
-     "-", "{F11}", 
-     "^", "{F12}", 
-    ; "\", "{F}", 
-
-    ; "q", "", 
-    ; "w", "", 
-    ; "e", "", 
-    ; "r", "", 
-    ; "t", "", 
-     "y", "{Home}", 
-     "u", "{PgDn}", 
-     "i", "{PgUp}", 
-     "o", "{End}", 
-    ; "p", "", 
-    ; "@", "", 
-    ; "[", "", 
-
-     "a", "{F15}", 
-     "s", "{ESC}", 
-     "d", "{Delete}", 
-     "f", "{BackSpace}", 
-     "g", "{F14}", 
-     "h", "{Blind}{Left}", 
-     "j", "{Blind}{Down}", 
-     "k", "{Blind}{Up}", 
-     "l", "{Blind}{Right}", 
-    ; ";", "", 
-    ; ":", "", 
-    ; "]", "", 
-
-     "z", "{Blind}^{z}", 
-     "x", "^{x}", 
-     "c", "^{Insert}", 
-     "v", "+{Insert}", 
-    ; "b", "", 
-    ; "n", "", 
-    ; "m", "", 
-    ; ",", "", 
-    ; ".", "", 
-    ; "/", "", 
-    ;"vkE2","",
-)
+;関数名 :ChkLayerTrig
+;機能   :レイヤキーが押されているかチェックする
+;引数   :なし
+ChkLayerTrig()
+{
+    for k in LayerTrigKeys
+    {
+        if( GetKeyState(k,"P") )
+        {
+            return true
+        } 
+    }
+    return false
+}
 
 ;レイヤー時のホットキー登録
-HotIf (*) => GetKeyState("vk1C", "P") || GetKeyState("vk1D", "P") || GetKeyState("RAlt","P")
-for key in hotkeys
-    HotKey("*$" . key, MyLayerAction)
-
+HotIf (*) => ChkLayerTrig
+    for key in hotkeys
+        HotKey("*$" . key, MyLayerAction)
 HotIf
 
-*RAlt::return
-*vk1C::return
-*vk1D::return
+; トリガキーを無効化(トリガとしてだけ使いたいため)
+for key in LayerTrigKeys {
+    HotKey("*" . key, (*) => 0) ; *指定キー :: return と同じ意味になる
+}
 
+;関数名 :MyLayerAction
+;機能   :レイヤーキーが押されているときの動作を送信する
+;引数   :input (自動的にA_ThisHotkeyを受ける)
 MyLayerAction(input) {
     global layerMap
     cleanKey := RegExReplace(input, "[*$ ]*(.|sc..|vk..)", "$1")

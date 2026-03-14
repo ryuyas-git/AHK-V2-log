@@ -1,8 +1,4 @@
-﻿#Requires AutoHotkey v2.0
-
-#include "Config.ahk"
-
-; --- 疑似的な入出力ストリーム ---
+﻿; --- 疑似的な入出力ストリーム ---
 global streamSelf := Array()
 
 ; --- 状態定義 (ENUMの代わり) ---
@@ -224,5 +220,3 @@ isShiftOn(k)
 	; もし辞書に登録があればその文字を返し、なければ大文字にして返す
 	return shiftMap.Has(k) ? shiftMap[k] : StrUpper(k)
 }
-
-#Include "Layer.ahk"
