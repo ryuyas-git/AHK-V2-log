@@ -11,14 +11,8 @@ class KeyState {
     static SINGLE_LONG  := 5 ; 単押し・長押し確定
 }
 
-; --- シフト以外のホットキーが効かないように条件付けを行う(ここから) ---
-HotIf (*) => !GetKeyState("Ctrl", "P") 
-          && !GetKeyState("Alt", "P") 
-          && !GetKeyState("LWin", "P") 
-          && !GetKeyState("RWin", "P")
-          && !GetKeyState("vk1C", "P") ; 変換キー
-          && !GetKeyState("vk1D", "P") ; 無変換キー
-          && !GetKeyState("RAlt", "P") 
+; --- レイヤーキーが効かないように条件付けを行う(ここから) ---
+HotIf (*) => !ChkLayerTrig()
 
 ; --- ホットキーの登録 ---
 for key in hotkeys
@@ -30,7 +24,7 @@ for key in hotkeys
 }
 
 HotIf 
-; --- シフト以外のホットキーが効かないように条件付けを行う(ここまで) ---
+; --- レイヤーキーが効かないように条件付けを行う(ここまで) ---
 
 ; 関数:     Down_Push
 ; 機能:     keyDownの入力ストリームへの登録
@@ -176,9 +170,9 @@ ExecuteAction(keyName, keyAction) {
         actionTrig := sendActionList[keyName] ; Getを使わず直接参照でOK
         switch (keyAction)
         {
-            case "Single":  outputAction := actionTrig.Single
-            case "Double":  outputAction := actionTrig.Double
-            case "Long":    outputAction := actionTrig.Long
+            case "Single":  outputAction := "{Blind}" . actionTrig.Single
+            case "Double":  outputAction := "{Blind}" . actionTrig.Double
+            case "Long":    outputAction := "{Blind}" . actionTrig.Long
             default:        outputAction := "NoAction" 
         }
     }
@@ -186,8 +180,8 @@ ExecuteAction(keyName, keyAction) {
     {
         switch (keyAction)
         {
-            case "Double":  outputAction := keyName . keyName
-            case "Quick" :  outputAction := keyName
+            case "Double":  outputAction := "{Blind}" . keyName . keyName
+            case "Quick" :  outputAction := "{Blind}" . keyName
             default:        outputAction := keyName
         }
     }

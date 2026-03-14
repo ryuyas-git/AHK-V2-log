@@ -1,8 +1,8 @@
 
 ;関数名 :ChkLayerTrig
 ;機能   :レイヤキーが押されているかチェックする
-;引数   :なし
-ChkLayerTrig()
+;引数   :可変長引数
+ChkLayerTrig(*)
 {
     for k in LayerTrigKeys
     {
@@ -15,7 +15,7 @@ ChkLayerTrig()
 }
 
 ;レイヤー時のホットキー登録
-HotIf (*) => ChkLayerTrig
+HotIf (*) => ChkLayerTrig()
     for key in hotkeys
         HotKey("*$" . key, MyLayerAction)
 HotIf
