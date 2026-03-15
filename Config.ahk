@@ -157,7 +157,7 @@ global layerMap := Map(
     ; "w", "", 
     ; "e", "", 
     ; "r", "", 
-    ; "t", "", 
+     "t", "^{t}", 
      "y", "{Home}", 
      "u", "{PgDn}", 
      "i", "{PgUp}", 

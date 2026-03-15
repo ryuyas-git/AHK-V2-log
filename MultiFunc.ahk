@@ -164,15 +164,15 @@ mainOutFunc()
 ; 引数:     keyAction(キーアクションの判定結果)
 ExecuteAction(keyName, keyAction) {
     outputAction := "NoAction"
-
+    prefix := ( GetKeyState("Ctrl", "P") || GetKeyState("Alt", "P") )? "{Blind}" : ""
     if sendActionList.Has(keyName) ; リストに機能定義あり
     {
         actionTrig := sendActionList[keyName] ; Getを使わず直接参照でOK
         switch (keyAction)
         {
-            case "Single":  outputAction := "{Blind}" . actionTrig.Single
-            case "Double":  outputAction := "{Blind}" . actionTrig.Double
-            case "Long":    outputAction := "{Blind}" . actionTrig.Long
+            case "Single":  outputAction := prefix . actionTrig.Single
+            case "Double":  outputAction := prefix . actionTrig.Double
+            case "Long":    outputAction := prefix . actionTrig.Long
             default:        outputAction := "NoAction" 
         }
     }
@@ -180,8 +180,8 @@ ExecuteAction(keyName, keyAction) {
     {
         switch (keyAction)
         {
-            case "Double":  outputAction := "{Blind}" . keyName . keyName
-            case "Quick" :  outputAction := "{Blind}" . keyName
+            case "Double":  outputAction := prefix . keyName . keyName
+            case "Quick" :  outputAction := prefix . keyName
             default:        outputAction := keyName
         }
     }
